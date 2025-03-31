@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets_admin/assets";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken, backendUrl } = useContext(AdminContext);
+  const { setAToken, backendUrl } = useContext(AdminContext);
   console.log(backendUrl);
   const onSubmitHandle = async (e) => {
     e.preventDefault();
@@ -18,7 +19,11 @@ const Login = () => {
           password,
         });
         if (data.success) {
-          console.log(data.token);
+          localStorage.setItem("aToken", data.token);
+          setAToken(data.token);
+        } else {
+          toast.error(data.message);
+          alert(data.message);
         }
       } else {
       }
