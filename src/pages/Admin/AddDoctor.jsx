@@ -56,7 +56,7 @@ const AddDoctor = () => {
 
       console.log(data);
       if (data.success) {
-        toast.success(data.data.message);
+        toast.success(data.message);
         setDocImg(false);
         setName("");
         setEmail("");
@@ -67,7 +67,7 @@ const AddDoctor = () => {
         setAbout("");
         setFees("");
       } else {
-        toast.error(data.data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
