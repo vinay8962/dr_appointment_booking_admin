@@ -59,6 +59,8 @@ const AllApointment = () => {
             </p>
             {item.cancelled ? (
               <p className="text-red-400 text-xs font-medium">Cancelled</p>
+            ) : item.isCompleted ? (
+              <p className="text-greem-500 text-xs font-medium">Completed</p>
             ) : (
               <img
                 src={assets.cancel_icon}

@@ -3,6 +3,7 @@ import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { DoctorContext } from "../context/DoctorContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
@@ -10,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setAToken, backendUrl } = useContext(AdminContext);
   const { setDToken } = useContext(DoctorContext);
+  const navigate = useNavigate;
   console.log(backendUrl);
   const onSubmitHandle = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("aToken", data.token);
           setAToken(data.token);
+          navigate("/admin-dashboard");
         } else {
           toast.error(data.message);
           alert(data.message);
@@ -34,6 +37,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("dToken", data.token);
           setDToken(data.token);
+          navigate("/doctor-dashboard");
           console.log(data);
         } else {
           toast.error(data.message);
